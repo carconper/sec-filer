@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Welcome to Filinger</title>
+    {% endif %}
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class=header>
+        <p>HEADER</p> 
+    </div>
+    <div class="mount-point">
+        <p>React Container component will be mounted in here</p> 
+    </div>
+    <div class="footer">
+        <p>FOOTER</p> 
+    </div>
+    <!-- BEGIN SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+    <script src="ui/static/scripts/js/index.js"></script>
+    <!-- END SCRIPTS -->
+</body>
+
+</html>
