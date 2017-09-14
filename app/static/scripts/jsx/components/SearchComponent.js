@@ -1,14 +1,34 @@
 var constants = require('../Constants');
 var axios = require('axios');
+var CompanyComponent = require('./CompanyComponent');
 
 var SearchComponent = React.createClass({
 
 	getInitialState: function () {
 		return {
 			symbol: '',
-			metadata: '',
+			metadata: {},
       hidden: true
 		}
+	},
+
+	componentWillMount: function () {
+		axios.get(constants.EC2_INUSE.concat(constants.RESOURCE_API_SEARCH),
+							{ params: {
+									symbol: "AAPL"
+								}
+							}
+		)
+			.then(function(response) {
+				constants.DEBUG_SEARCH && console.log("Initial response", response);
+				//metadata = response.data.company_data;
+				this.setState(
+					{
+						metadata: response.data.company_data
+					}
+				);
+				constants.DEBUG_SEARCH && console.log("Initial metadata", response.data.company_data);
+			}.bind(this));
 	},
 
 	handleInput: function (e) {
@@ -52,6 +72,7 @@ var SearchComponent = React.createClass({
 							 onChange={ this.handleInput } />
 				<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
         {this._renderButton()}
+			  <CompanyComponent metadata={ this.state.metadata }/>
 			</div>
 		)
 	}
