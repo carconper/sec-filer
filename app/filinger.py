@@ -31,9 +31,9 @@ def metadata():
     except requests.exceptions.RequestException as e:
         # Save the backtrace info
         exc_info = sys.exc_info()
-        logger.error('Get advertiser list from rewardStyle: %s -- %s',
+        logger.error('Get Company Metadata: %s -- %s',
                      str(e))
-        #raise RewardStyleRequestError, RewardStyleRequestError(e), exc_info[2]
+        #raise EdgarRequestError, EdgarRequestError(e), exc_info[2]
 
     print("Company Metadata:", r.text, file=sys.stderr)
 
@@ -49,6 +49,50 @@ def metadata():
     print("Extracted data:", aux, file=sys.stderr)
 
     return jsonify(status="OK", company_data=aux)
+
+
+@app.route("/filings")
+def filings():
+
+    SEC_URL = "https://www.sec.gov"
+    params = request.args
+
+    r = requests.get("https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + params['symbol'] + "&type=&dateb=&owner=exclude&start=" + params['begin'] + "&count=" + params['count'])
+    tree = html.fromstring(r.content)
+    #print("The text", r.text)
+    filings = tree.xpath('//td[@nowrap="nowrap"]/text()')
+    #print("The filings: ", filings, file=sys.stderr)
+
+    test = [td.text_content() for td in tree.xpath('//td')]
+    #print("The table contents: ", test, file=sys.stderr)
+    filings = []
+    documents = tree.xpath('//a[@id="documentsbutton"]/@href')
+    #print("The documents: ", documents, file=sys.stderr)
+
+
+    df = pd.read_html(r.content,attrs = {'class': 'tableFile2'})[0]
+    df2 = pd.read_html(r.content,attrs = {'class': 'tableFile2'})
+    #print("pandas table", df, file=sys.stderr)
+    #print("pandas table", df2, file=sys.stderr)
+    #print("0 --> ", df[0].tolist(), file=sys.stderr)
+    #print("1 --> ", df[1].tolist(), file=sys.stderr)
+    #print("2 --> ", df[2].tolist(), file=sys.stderr)
+    #print("3 --> ", df[3].tolist(), file=sys.stderr)
+
+    forms = df[0].tolist()
+    descriptions = df[2].tolist()
+    dates = df[3].tolist()
+
+    for i in range(1, len(forms)):
+        tmp = {
+                'form': forms[i], 
+                'desc': descriptions[i], 
+                'date':dates[i], 
+                'link':SEC_URL + documents[i - 1]
+                }
+        filings.append(tmp)
+
+    return jsonify(status="OK", filing_list=filings)
 
 if __name__ == "__main__":
     app.debug = True

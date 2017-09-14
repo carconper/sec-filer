@@ -1,6 +1,7 @@
 var constants = require('../Constants');
 var axios = require('axios');
 var CompanyComponent = require('./CompanyComponent');
+var FilingComponent = require('./FilingComponent');
 
 var SearchComponent = React.createClass({
 
@@ -8,6 +9,7 @@ var SearchComponent = React.createClass({
 		return {
 			symbol: '',
 			metadata: {},
+			filings: {},
       hidden: true
 		}
 	},
@@ -28,6 +30,25 @@ var SearchComponent = React.createClass({
 					}
 				);
 				constants.DEBUG_SEARCH && console.log("Initial metadata", response.data.company_data);
+			}.bind(this));
+
+
+		axios.get(constants.EC2_INUSE.concat(constants.RESOURCE_API_FILINGS),
+							  { params: {
+										symbol: "AAPL",
+										begin: 0,
+										count: 10
+									}
+								}
+			)
+			.then(function(response) {
+				constants.DEBUG_SEARCH && console.log("Response Filing", response);
+				this.setState(
+					{
+						filings: response.data.filing_list,
+					}
+				);
+				constants.DEBUG_SEARCH && console.log("Response filings",this.state.filings);
 			}.bind(this));
 	},
 
@@ -53,6 +74,24 @@ var SearchComponent = React.createClass({
 				);
 				constants.DEBUG_SEARCH && console.log(this.state.metadata);
 			}.bind(this));
+
+		axios.get(constants.EC2_INUSE.concat(constants.RESOURCE_API_FILINGS),
+							  { params: {
+										symbol: this.state.symbol,
+										begin: 0,
+										count: 10
+									}
+								}
+			)
+			.then(function(response) {
+				constants.DEBUG_SEARCH && console.log("Response Filing", response);
+				this.setState(
+					{
+						filings: response.data.filing_list,
+					}
+				);
+				constants.DEBUG_SEARCH && console.log("Response filings",this.state.filings);
+			}.bind(this));
 	},
 
   _renderButton: function() {
@@ -73,6 +112,7 @@ var SearchComponent = React.createClass({
 				<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
         {this._renderButton()}
 			  <CompanyComponent metadata={ this.state.metadata }/>
+				<FilingComponent filings={ this.state.filings } />
 			</div>
 		)
 	}
