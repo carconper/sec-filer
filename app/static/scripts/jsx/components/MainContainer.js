@@ -1,5 +1,4 @@
 var SearchComponent = require('./SearchComponent');
-var ResultsComponent = require('./ResultsComponent');
 
 var MainContainer = React.createClass({
 

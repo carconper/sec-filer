@@ -74,15 +74,6 @@ var SearchComponent = React.createClass({
 			}.bind(this));
 	},
 
-  _renderButton: function() {
-    if (this.state.hidden) {
-      return ;
-    }
-    return (
-			<button className="btn-search" type='button'>Show Filings</button>
-    )
-  },
-
 	_renderFilings: function() {
 		if (this.state.hidden) {
 			return ;
@@ -99,12 +90,13 @@ var SearchComponent = React.createClass({
 	render: function() {
 
 		return (
-			<div className='search'>
-				<input type='text'
-							 placeholder="Search Company by Trading Symbol (ex: AAPL)"
-							 onChange={ this.handleInput } />
-				<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
-        {this._renderButton()}
+			<div className='panel'>
+				<div className='search'>
+					<input type='text'
+								 placeholder="Search Company by Trading Symbol (ex: AAPL)"
+								 onChange={ this.handleInput } />
+					<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
+				</div>
 				{this._renderFilings()}
 			</div>
 		)
