@@ -18,9 +18,14 @@ var FilingComponent = React.createClass({
 		fils = Array.prototype.slice.call(filings);
 
 		return (
-			<div className="list-container">
-				{ fils.map(function(filing, index){ return <ListItem key={index} filing={filing}>Test</ListItem> }) }
-			  <p>This is the list container</p>
+			<div class="list-container">
+				{this.props.status ? (
+					<div>
+						{ fils.map(function(filing, index){ return <ListItem key={index} filing={filing}>Test</ListItem> }) }
+					</div>
+				) : (
+					<p>No Filings available</p>
+				)}
 			</div>	
 		)
 	}

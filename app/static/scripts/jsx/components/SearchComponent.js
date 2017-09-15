@@ -10,7 +10,10 @@ var SearchComponent = React.createClass({
 			symbol: '',
 			metadata: {},
 			filings: {},
-      hidden: true
+			hidden: true,
+			ready: true,
+			comp_status: false,
+			fil_status: false
 		}
 	},
 
@@ -26,7 +29,8 @@ var SearchComponent = React.createClass({
 				//metadata = response.data.company_data;
 				this.setState(
 					{
-						metadata: response.data.company_data
+						metadata: response.data.company_data,
+						comp_status: true
 					}
 				);
 				constants.DEBUG_SEARCH && console.log("Initial metadata", response.data.company_data);
@@ -46,6 +50,7 @@ var SearchComponent = React.createClass({
 				this.setState(
 					{
 						filings: response.data.filing_list,
+						fil_status: true
 					}
 				);
 				constants.DEBUG_SEARCH && console.log("Response filings",this.state.filings);
@@ -66,12 +71,21 @@ var SearchComponent = React.createClass({
 			)
 			.then(function(response) {
 				constants.DEBUG_SEARCH && console.log(response);
-				this.setState(
-					{
-						metadata: response.data.company_data,
-            hidden: false
-					}
-				);
+				if (response.data.status == 'NOK') {
+					this.setState(
+						{
+							comp_status: false
+						}
+					)
+				} else {
+					this.setState(
+						{
+							metadata: response.data.company_data,
+							hidden: false,
+							comp_status: true
+						}
+					);
+				}
 				constants.DEBUG_SEARCH && console.log(this.state.metadata);
 			}.bind(this));
 
@@ -85,11 +99,20 @@ var SearchComponent = React.createClass({
 			)
 			.then(function(response) {
 				constants.DEBUG_SEARCH && console.log("Response Filing", response);
-				this.setState(
-					{
-						filings: response.data.filing_list,
-					}
-				);
+				if (response.data.status == 'NOK') {
+					this.setState(
+						{
+							fil_status: false
+						}
+					)
+				} else {
+					this.setState(
+						{
+							filings: response.data.filing_list,
+							fil_status: true
+						}
+					);
+				}
 				constants.DEBUG_SEARCH && console.log("Response filings",this.state.filings);
 			}.bind(this));
 	},
@@ -111,8 +134,8 @@ var SearchComponent = React.createClass({
 							 onChange={ this.handleInput } />
 				<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
         {this._renderButton()}
-			  <CompanyComponent metadata={ this.state.metadata }/>
-				<FilingComponent filings={ this.state.filings } />
+			  <CompanyComponent status={ this.state.comp_status } metadata={ this.state.metadata }/>
+				<FilingComponent status={ this.state.fil_status } filings={ this.state.filings } />
 			</div>
 		)
 	}

@@ -11,15 +11,22 @@ var CompanyComponent = React.createClass({
 	render: function () {
 
 		constants.DEBUG_SEARCH && console.log("PROPS metadata", this.props.metadata);
+		constants.DEBUG_SEARCH && console.log("PROPS status", this.props.status);
 
 		return (
 			<div class="company">
-				<p> Company Name: { this.props.metadata['companyname'] } </p>
-				<p> CIK: { this.props.metadata['cik'] } </p>
-				<p> { this.props.metadata['siccode'] } | { this.props.metadata['sicdescription'] } </p>
-				<p> { this.props.metadata['marketoperator'] } </p>
+				{this.props.status ? (
+					<div class="metadata">
+						<p> Company Name: {this.props.metadata['companyname']} </p>
+						<p> CIK: {this.props.metadata['cik']} </p>
+						<p> {this.props.metadata['siccode']} | {this.props.metadata['sicdescription']} </p>
+						<p> {this.props.metadata['marketoperator']} </p>
+					</div>
+				) : (
+						<p> Company doesnt exist. Try another Trading Symbol </p>
+				)}
 			</div>
-		)
+		);
 	}
 });
 
