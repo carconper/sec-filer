@@ -1,3 +1,6 @@
+var SearchComponent = require('./SearchComponent');
+var ResultsComponent = require('./ResultsComponent');
+
 var MainContainer = React.createClass({
 
 	getInitialState: function() {
@@ -10,6 +13,8 @@ var MainContainer = React.createClass({
 		return (
 			<div className='container'>
 				<h1> MainContainer Component </h1>
+				<SearchComponent />
+				<ResultsComponent />
 			</div>
 		)
 	}
