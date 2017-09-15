@@ -1,0 +1,25 @@
+div.container {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  background: #fbfbfb;
+  text-align: center;
+  height: 800px;
+  justify-content: space-between;
+}
+
+div.search {
+	height: 500px;
+}
+
+div.list-container {
+  margin-top: 20px;
+  background: #fbfbfb;
+  display: flex;
+  height: 800px;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-left: 20px;
+  margin-right: 20px;
+}

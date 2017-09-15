@@ -14,9 +14,9 @@ var CompanyComponent = React.createClass({
 		constants.DEBUG_SEARCH && console.log("PROPS status", this.props.status);
 
 		return (
-			<div class="company">
+			<div className="company">
 				{this.props.status ? (
-					<div class="metadata">
+					<div className="metadata">
 						<p> Company Name: {this.props.metadata['companyname']} </p>
 						<p> CIK: {this.props.metadata['cik']} </p>
 						<p> {this.props.metadata['siccode']} | {this.props.metadata['sicdescription']} </p>

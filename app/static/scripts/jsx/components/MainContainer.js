@@ -14,7 +14,6 @@ var MainContainer = React.createClass({
 			<div className='container'>
 				<h1> MainContainer Component </h1>
 				<SearchComponent />
-				<ResultsComponent />
 			</div>
 		)
 	}
