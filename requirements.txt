@@ -3,3 +3,4 @@ requests==2.18.1
 pandas==0.20.3
 html5lib==0.999999999
 bs4==0.0.1
+lxml==3.8.0

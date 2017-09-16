@@ -8,13 +8,10 @@ import pandas as pd
 from urllib import urlencode
 from lxml import html
 
+from config import *
 
 app = Flask(__name__)
 
-API_COMPANIES_EDGARONLINE = "http://edgaronline.api.mashery.com/v2/companies?"
-API_APPKEY_EDGARONLINE = "8w38dwb4dn84r4953wgb75mf"
-SEC_URL = "https://www.sec.gov"
-SEC_URL_FILINGS = "https://www.sec.gov/cgi-bin/browse-edgar"
 
 @app.route("/")
 def main():
