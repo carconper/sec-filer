@@ -74,13 +74,24 @@ var SearchComponent = React.createClass({
 			}.bind(this));
 	},
 
+	_renderCompany: function() {
+		if (this.state.hidden) {
+			return ;
+		} else {
+			return (
+				<div className='company-panel'>
+					<CompanyComponent status={ this.state.status } metadata={ this.state.metadata }/>
+				</div>
+			)
+		}
+	},
+
 	_renderFilings: function() {
 		if (this.state.hidden) {
 			return ;
 		} else {
 			return (
 				<div className='result'>
-					<CompanyComponent status={ this.state.status } metadata={ this.state.metadata }/>
 			    <FilingComponent status={ this.state.status } company={ this.state.symbol } />
 				</div>
 			)
@@ -91,11 +102,17 @@ var SearchComponent = React.createClass({
 
 		return (
 			<div className='panel'>
-				<div className='search'>
-					<input type='text'
-								 placeholder="Search Company by Trading Symbol (ex: AAPL)"
-								 onChange={ this.handleInput } />
-					<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
+				<div className='company'>
+					<div className='search'>
+						<input type='text'
+									 placeholder="Search Company by Trading Symbol (ex: AAPL)"
+									 onChange={ this.handleInput } />
+						<div className='search-control'>
+							<button className="btn-search" type='button' onClick={ this.companySearch }>Search</button>
+							<h3>{this.state.symbol}</h3>
+						</div>
+					</div>
+					{this._renderCompany()}
 				</div>
 				{this._renderFilings()}
 			</div>
