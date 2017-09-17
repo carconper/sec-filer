@@ -55,8 +55,9 @@ var FilingComponent = React.createClass({
 			constants.DEBUG_FILING && console.log("buildFilings():", i, fils[i]['form']);
 			var name = fils[i]['form'];
 			var desc = fils[i]['desc'];
+			var date = fils[i]['date'];
 			var link = fils[i]['link'];
-			elements.push(<ListItem key={i + this.state.begin} name={name} description={desc} url={link}/>);
+			elements.push(<ListItem key={i + this.state.begin} name={name} description={desc} date={date} url={link}/>);
 		}
 		return elements;
 	},
@@ -70,7 +71,13 @@ var FilingComponent = React.createClass({
 					symbol: this.props.symbol
 			})
 		} else {
-			return (this.state.filingsShown);
+			return (
+				<table className='filings'>
+					<tbody>
+						{this.state.filingsShown}
+					</tbody>
+				</table>
+			)
 		};
 	},
 
@@ -109,7 +116,7 @@ var FilingComponent = React.createClass({
 		constants.DEBUG_FILING && console.log("_renderWaypoint():", this.state.filingsLeft);
 		if (this.state.filingsLeft) {
 			return (
-				<div>
+				<div className='loading'>
 					<Waypoint onEnter={this._renderMore} />
 					<p>Loading more filings...</p>
 				</div>
