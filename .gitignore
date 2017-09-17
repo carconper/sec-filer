@@ -107,3 +107,7 @@ package.json
 
 # Dont include the generated JS files
 app/static/scripts/js/
+
+# others
+app/keys.py
+vhost.conf*
