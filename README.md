@@ -1,4 +1,4 @@
-# sec-filinger
+# sec-filer
 Retieve a Company's filings from SEC
 
 ## Introduction
@@ -10,16 +10,16 @@ As part of their mission, to meet the SEC's requirements for disclosure, a compa
 SEC operates and mantains the Electronic Data Gathering Analysis and Retrieval (EDGAR) system, responsible of receiving, processing, and disseminating the submitted financial statements. The EDGAR database is made available for public access
 
 
-## Filinger
+## Sec-Filer
 
-Filinger (this project) is a simple web application that enables the retireval of the different documents filed by Companies to the Security & Exchange Comission in order to fulfill SEC's requirements, using the trading symbol of the Company.
+Sec-Filer (this project) is a simple web application that enables the retireval of the different documents filed by Companies to the Security & Exchange Comission in order to fulfill SEC's requirements, using the trading symbol of the Company.
 
 The application's UI is built on React and uses a reduced and simple Flask backend on the server side that takes care of retrieving the Company metadata from edgar-online and the filings from the EDGAR database directly.
 
 
 ## Install
 
-The project contains everything to bring up your own Filinger instance. You'll need to have python 2.7 with pip 9.0.1 (or higher) and Node 6.11 with npm 5.2 (or higher) installed. It is recommended to create a virtual environment with "virtualenv" for your instance of Filinger.
+The project contains everything to bring up your own Sec-Filer instance. You'll need to have python 2.7 with pip 9.0.1 (or higher) and Node 6.11 with npm 5.2 (or higher) installed. It is recommended to create a virtual environment with "virtualenv" for your instance of Sec-Filer.
 
 1. Create an isolated and separated python virtual environment with `virtualenv {env} --no-site-packages`:
 		
@@ -39,11 +39,11 @@ The project contains everything to bring up your own Filinger instance. You'll n
 
 ## Setup
 
-To bring up a Filinger instance as it is, you just need to :
+To bring up a Sec-Filer instance as it is, you just need to :
 
 1. Modify the Constants.js file under app/static/scripts/jsx/ and modify the *OTHER_INSTANCE* constant to contain your server domain, and then map *OTHER_INSTANCE* to *EC2_INUSE*
 
-2. Filinger uses a 3rd party API called [edgar-online](http://developer.edgar-online.com) to retrieve the metadata of a Company based on the Trading Symbol. You will need to create an account in order to obtain an *appkey* that will be used on your API calls to *edgar-online*. Once you have your *appkey*, create `keys.py` file under `app/` folder and add the following line:
+2. Sec-Filer uses a 3rd party API called [edgar-online](http://developer.edgar-online.com) to retrieve the metadata of a Company based on the Trading Symbol. You will need to create an account in order to obtain an *appkey* that will be used on your API calls to *edgar-online*. Once you have your *appkey*, create `keys.py` file under `app/` folder and add the following line:
 
 	```python
 	(...)
