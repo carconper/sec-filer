@@ -20,22 +20,22 @@ var CompanyComponent = React.createClass({
 						<table>
 							<tr>
 								<th>Company</th>
-								<th>{this.props.metadata['companyname']}</th>
+								<td>{this.props.metadata['companyname']}</td>
 							</tr>
 							<tr>
-								<td>CIK</td>
+								<th>CIK</th>
 								<td>{this.props.metadata['cik']}</td>
 							</tr>
 							<tr>
-								<td>SIC Code</td>
+								<th>SIC Code</th>
 								<td>{this.props.metadata['siccode']}</td>
 							</tr>
 							<tr>
-								<td>SIC Desc</td>
+								<th>SIC Desc</th>
 								<td>{this.props.metadata['sicdescription']}</td>
 							</tr>
 							<tr>
-								<td>Market</td>
+								<th>Market</th>
 								<td>{this.props.metadata['marketoperator']}</td>
 							</tr>
 						</table>
