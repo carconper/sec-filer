@@ -20,10 +20,17 @@ var ListItem = React.createClass({
 		constants.DEBUG_SEARCH && console.log("render(ListItem)", href);
 
     return (
-			<div className='element' onClick={this.filingClicked}>
-				<a href={href} target="_blank">{this.props.name}</a>
-				{this.props.description}
-			</div>
+			<tr className='tr-elem'>
+				<td className='td-link'>
+					<a className='form-link' href={href} target="_blank">{this.props.name}</a>
+				</td>
+				<td className='td-desc'>
+					<a href={href} target="_blank">{this.props.description}</a>
+				</td>
+				<td className='td-date'>
+					{this.props.date}
+				</td>
+			</tr>
     )
   }
 });

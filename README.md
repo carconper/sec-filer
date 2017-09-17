@@ -66,7 +66,7 @@ Flask is not meant to be used in production environments directly as a server ap
 
 To run the application in a development environment, it will be enough to:
 
-1. Modify the IP address in `app.run(host='X.X.X.X')` under app/filinger.py to adapt it to the IP where you will be bringing your instance app
+1. Modify the IP address in `app.run(host='X.X.X.X')` under app/filer.py to adapt it to the IP where you will be bringing your instance app
 
 2. By default, Flask runs in port 5000. If you wanna use a different port, you can use any >1024. To configure the port where to bring up the instance, add the port parameter to your `app.run()` statement:
 
@@ -91,20 +91,20 @@ FInd the steps below to deploy your Flask backend application on a Production En
 
 	sys.path.append('APPLICATION-ABSOLUTE-PATH')
 
-	from filinger import app as application
+	from filer import app as application
 	```
 
 3. Create the `/etc/httpd/conf.d/vhost.conf` file with the specifics of your instance (**NOTE**: *replace `APPLICATION-ABSOLUTE-PATH` below with your path*)
 
 	```xml
 	<virtualhost *:80>
-		ServerName my.filinger
+		ServerName my.filer
 
-		WSGIDaemonProcess filinger user=ec2-user group=www threads=5 home=APPLICATION-ABSOLUTE-PATH
-		WSGIScriptAlias / APPLICATION-ABSOLUTE-PATH/filinger.wsgi
+		WSGIDaemonProcess filer user=ec2-user group=www threads=5 home=APPLICATION-ABSOLUTE-PATH
+		WSGIScriptAlias / APPLICATION-ABSOLUTE-PATH/filer.wsgi
 
 		<directory APPLICATION-ABSOLUTE-PATH>
-					WSGIProcessGroup filinger
+					WSGIProcessGroup filer
 				WSGIApplicationGroup %{GLOBAL}
 					WSGIScriptReloading On
 					Order deny,allow
@@ -115,7 +115,7 @@ FInd the steps below to deploy your Flask backend application on a Production En
 
 4. Modify the /etc/hosts file
 	
-	`127.0.0.1   my.filinger`
+	`127.0.0.1   my.filer`
 	
 5. Start the httpd service
 	

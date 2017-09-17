@@ -18,26 +18,28 @@ var CompanyComponent = React.createClass({
 				{this.props.status ? (
 					<div className="info">
 						<table>
-							<tr>
-								<th>Company</th>
-								<td>{this.props.metadata['companyname']}</td>
-							</tr>
-							<tr>
-								<th>CIK</th>
-								<td>{this.props.metadata['cik']}</td>
-							</tr>
-							<tr>
-								<th>SIC Code</th>
-								<td>{this.props.metadata['siccode']}</td>
-							</tr>
-							<tr>
-								<th>SIC Desc</th>
-								<td>{this.props.metadata['sicdescription']}</td>
-							</tr>
-							<tr>
-								<th>Market</th>
-								<td>{this.props.metadata['marketoperator']}</td>
-							</tr>
+							<tbody>
+								<tr>
+									<th>Company</th>
+									<td>{this.props.metadata['companyname']}</td>
+								</tr>
+								<tr>
+									<th>CIK</th>
+									<td>{this.props.metadata['cik']}</td>
+								</tr>
+								<tr>
+									<th>SIC Code</th>
+									<td>{this.props.metadata['siccode']}</td>
+								</tr>
+								<tr>
+									<th>SIC Desc</th>
+									<td>{this.props.metadata['sicdescription']}</td>
+								</tr>
+								<tr>
+									<th>Market</th>
+									<td>{this.props.metadata['marketoperator']}</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 				) : (
