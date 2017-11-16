@@ -1,5 +1,5 @@
 # sec-filer
-Retieve a Company's filings from SEC
+Retrieve a Company's filings from SEC
 
 ## Introduction
 
